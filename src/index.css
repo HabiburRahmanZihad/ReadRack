@@ -1,0 +1,84 @@
+/* ============================
+    Import Google Fonts
+============================ */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Merriweather:ital,opsz,wght@0,18..144,300..900;1,18..144,300..900&display=swap');
+
+/* ============================
+    Import Tailwind CSS Core
+============================ */
+@import "tailwindcss";
+
+/* ============================
+    DaisyUI Theme Configuration
+============================ */
+@plugin "daisyui" {
+    themes: light --default, dark;
+}
+
+/* 🌞 Light Theme  */
+@plugin "daisyui/theme" {
+    name: "light";
+    default: true;
+
+    --color-primary: #CC9600;
+    /* Golden-orange for primary elements like buttons and headings */
+    --color-secondary: #8B6A3D;
+    /* Warm brown for secondary buttons and accents */
+    --color-accent: #434244;
+    /* Dark gray accent for outlines, icons, or subtle highlights */
+    --color-neutral: #000000;
+    /* Rich black for text or high-contrast elements */
+    --color-base-100: #ffffff;
+    /* Main background color */
+    --color-base-200: #F3F3F3;
+    /* Section or card backgrounds (light gray) */
+    --color-base-300: #E7E7E7;
+    /* Borders, input fields, and hover backgrounds */
+}
+
+
+/* 🌙 Dark Theme  */
+@plugin "daisyui/theme" {
+    name: "dark";
+
+    --color-primary: #FFB300;
+    /* Golden-orange for primary elements like buttons and headings */
+    --color-secondary: #8B5E3C;
+    /* Warm, rich brown for secondary buttons and accents */
+    --color-accent: #FFD54F;
+    /* Soft golden-yellow accent for borders, icons, or links */
+    --color-neutral: #1A1A1A;
+    /* Near-black neutral background for cards and surfaces */
+    --color-base-100: #0E0E0E;
+    /* Main background color */
+    --color-base-200: #1C1C1C;
+    /* Section or card backgrounds (slightly lighter) */
+    --color-base-300: #2E2E2E;
+    /* Borders, input fields, and dividers */
+    --color-highlight: #FFCB74;
+    /* Highlight color for hover/focus states or emphasis */
+    --color-info: #FFDC40;
+    /* Bright informative color for alerts or badges */
+    --color-content: #F5F5F5;
+    /* Main text color for high readability on dark backgrounds */
+}
+
+
+/* ============================
+    Global Styling
+============================ */
+* {
+    font-family: 'Inter', sans-serif;
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: 'Merriweather', serif;
+}
+
+.merriweather {
+    font-family: 'Merriweather', serif;
+}
+
+.group:hover {
+    z-index: 10;
+}
