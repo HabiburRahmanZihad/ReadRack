@@ -2,12 +2,14 @@ import { Outlet, useLocation } from 'react-router';
 import Navbar from '../Components/Navbar/Navbar';
 import Footer from '../Components/Footer/Footer';
 import { motion } from 'framer-motion';
+import ScrollToTop from '../hooks/ScrollToTop';
 
 const Root = () => {
     const location = useLocation();
 
     return (
         <div className='container mx-auto'>
+            <ScrollToTop></ScrollToTop>
             <Navbar />
 
             <motion.div

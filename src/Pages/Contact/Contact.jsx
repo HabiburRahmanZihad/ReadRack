@@ -92,7 +92,7 @@ const Contact = () => {
                         </div>
                         <div className="flex items-center space-x-3">
                             <FaPhoneAlt className="text-primary w-5 h-5" />
-                            <span>+1 (800) 987-6543</span>
+                            <span>+8801329-453598</span>
                         </div>
                     </div>
                 </motion.div>

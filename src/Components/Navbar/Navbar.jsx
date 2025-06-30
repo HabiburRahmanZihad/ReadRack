@@ -24,21 +24,27 @@ const Navbar = () => {
                     <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Bookshelf</p>
                 )}
             </NavLink>
-            <NavLink to="/add-book">
-                {({ isActive }) => (
-                    <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Add Book</p>
-                )}
-            </NavLink>
-            <NavLink to="/my-books">
-                {({ isActive }) => (
-                    <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>My Books</p>
-                )}
-            </NavLink>
-            <NavLink to="/my-profile">
-                {({ isActive }) => (
-                    <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Profile</p>
-                )}
-            </NavLink>
+            {
+                user && (
+                    <>
+                        <NavLink to="/add-book">
+                            {({ isActive }) => (
+                                <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Add Book</p>
+                            )}
+                        </NavLink>
+                        <NavLink to="/my-books">
+                            {({ isActive }) => (
+                                <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>My Books</p>
+                            )}
+                        </NavLink>
+                        <NavLink to="/my-profile">
+                            {({ isActive }) => (
+                                <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Profile</p>
+                            )}
+                        </NavLink>
+                    </>
+                )
+            }
         </div>
     );
 
