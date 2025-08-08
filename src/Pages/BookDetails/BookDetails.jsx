@@ -23,26 +23,11 @@ const BookDetails = () => {
     const axiosSecure = useAxiosSecure();
 
     useEffect(() => {
-        const fetchBookDetails = async () => {
-            // axiosSecure.get(`/applications?email=${email}`)
-            try {
-                const res = await axiosSecure.get(`/books/${id}`);
-                setBook(res.data);
-
-                const reviewsRes = await axiosSecure.get(`/reviews/${id}`, {
-                    headers: {
-                        Authorization: `Bearer ${user?.accessToken}`,
-                    },
-                });
-                setReviews(reviewsRes.data);
-            } catch (error) {
-                console.error('Failed to fetch book details:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-
-        fetchBookDetails();
+        if (user?.accessToken) {
+            fetchBookDetails();
+        } else {
+            setLoading(false);
+        }
     }, [id, user?.accessToken, axiosSecure]);
 
     const hasUserReviewed = user && reviews.some((review) => review.user_email === user.email);
