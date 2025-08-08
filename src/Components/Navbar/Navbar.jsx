@@ -24,6 +24,11 @@ const Navbar = () => {
                     <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Bookshelf</p>
                 )}
             </NavLink>
+            <NavLink to="/book-quotes">
+                {({ isActive }) => (
+                    <p className={`px-4 my-1 text-xl merriweather ${isActive ? 'text-primary' : 'text-black lg:text-white'}`}>Book Quotes</p>
+                )}
+            </NavLink>
             {
                 user && (
                     <>

@@ -16,6 +16,7 @@ import BookDetails from '../Pages/BookDetails/BookDetails';
 import AddBook from '../Pages/AddBook/AddBook';
 import MyBooks from '../Pages/MyBooks/MyBooks';
 import UpdateBook from '../Pages/UpdateBook/UpdateBook';
+import BookQuotesGallery from '../Pages/BookQuotesGallery/BookQuotesGallery';
 
 
 export const router = createBrowserRouter([
@@ -55,6 +56,8 @@ export const router = createBrowserRouter([
             { path: 'forgot-password', element: <ForgetPassword></ForgetPassword> },
 
             { path: '*', element: <Error></Error> },
+
+            { path: 'book-quotes', element: <BookQuotesGallery /> },
         ]
     },
 ]);
