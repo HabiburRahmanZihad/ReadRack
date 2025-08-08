@@ -1,3 +1,4 @@
+import { motion } from 'framer-motion';
 import { useState, useContext } from 'react';
 import { Link } from 'react-router';
 import { Player } from '@lottiefiles/react-lottie-player';
@@ -61,30 +62,44 @@ const ForgetPassword = () => {
     };
 
     return (
-        <section className="min-h-[calc(100vh-300px)] bg-base-200 flex flex-col lg:flex-row items-center justify-center px-2 pb-10 md:pt-10">
+        <section className="min-h-[calc(100vh-300px)] bg-gradient-to-br from-base-200 to-base-100 flex flex-col lg:flex-row items-center justify-center px-4 pb-10 md:pt-10">
             <Helmet>
-                <title>Forget Password</title>
-                <meta name="description" content="Reset your password for ReadRack. Enter your email to receive a password reset link." />
+                <title>Forgot Password</title>
+                <meta
+                    name="description"
+                    content="Reset your password for ReadRack. Enter your email to receive a password reset link."
+                />
             </Helmet>
+
             {/* Lottie Animation */}
-            <div className="w-full lg:w-1/2 flex justify-center mb-12 lg:mb-0">
-                <Player autoplay loop src={animationData} className="w-80 h-90" />
-            </div>
+            <motion.div
+                initial={{ opacity: 0, x: -40 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6 }}
+                className="w-full lg:w-1/2 flex justify-center mb-12 lg:mb-0"
+            >
+                <Player autoplay loop src={animationData} className="w-72 h-80 drop-shadow-lg" />
+            </motion.div>
 
             {/* Reset Password Form */}
-            <div className="w-full lg:w-1/2 max-w-xl bg-white p-4 md:p-10 rounded-xl shadow-2xl border border-primary bg-opacity-90">
-                <h2 className="text-3xl font-bold text-primary mb-6 text-center">Reset Password</h2>
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
+                className="w-full lg:w-1/2 max-w-xl bg-white/90 p-6 md:p-10 rounded-xl shadow-xl border border-primary backdrop-blur-sm"
+            >
+                <h2 className="text-3xl font-bold text-primary mb-6 text-center">Reset Your Password</h2>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
+                <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-neutral mb-1">
-                            Email
+                        <label htmlFor="email" className="block text-sm font-medium text-neutral mb-2">
+                            Email Address
                         </label>
                         <input
                             id="email"
                             type="email"
                             required
-                            className="input input-bordered w-full"
+                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
@@ -94,22 +109,23 @@ const ForgetPassword = () => {
 
                     <button
                         type="submit"
-                        className="btn btn-primary w-full"
+                        className="btn w-full py-3 bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-md hover:opacity-90 transition"
                         disabled={isSubmitting}
                     >
                         {isSubmitting ? 'Sending...' : 'Send Reset Link'}
                     </button>
                 </form>
 
-                <p className="text-sm text-center text-base-400 mt-4">
+                <p className="text-sm text-center text-base-400 mt-6">
                     Remember your password?{' '}
-                    <Link to="/signin" className="text-primary hover:underline">
+                    <Link to="/signin" className="text-primary hover:underline font-medium">
                         Sign In
                     </Link>
                 </p>
-            </div>
+            </motion.div>
         </section>
     );
+
 };
 
 export default ForgetPassword;
