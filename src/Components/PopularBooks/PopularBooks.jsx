@@ -10,25 +10,22 @@ const PopularBooks = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
-    useEffect(() => {
-        const fetchPopularBooks = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/books`);
-                const sortedBooks = res.data
-                    .filter(book => Number.isInteger(book.upvote))
-                    .sort((a, b) => b.upvote - a.upvote)
-                    .slice(0, 8);
-                setPopularBooks(sortedBooks);
-            } catch (err) {
-                console.error(err);
-                setError(err);
-            } finally {
-                setLoading(false);
-            }
-        };
+useEffect(() => {
+    const fetchPopularBooks = async () => {
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/books/popular`);
+            setPopularBooks(res.data);
+        } catch (err) {
+            console.error(err);
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-        fetchPopularBooks();
-    }, []);
+    fetchPopularBooks();
+}, []);
+
 
     if (loading) return <LoadingSpinner />;
     if (error) return <Error />;
