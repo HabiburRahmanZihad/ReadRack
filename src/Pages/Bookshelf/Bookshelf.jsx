@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useCallback } from 'react';
 import axios from 'axios';
 import { FiSearch } from 'react-icons/fi';
 import Swal from 'sweetalert2';
@@ -14,107 +14,83 @@ const Bookshelf = () => {
     const { user } = useContext(AuthContext);
 
     const [books, setBooks] = useState([]);
-    const [filteredBooks, setFilteredBooks] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
 
     const [searchTerm, setSearchTerm] = useState('');
     const [readingStatusFilter, setReadingStatusFilter] = useState('');
 
-    useEffect(() => {
-        const fetchBooks = async () => {
-            try {
-                const res = await axios.get(`${import.meta.env.VITE_API_URL}/books`);
-                setBooks(res.data);
-                setFilteredBooks(res.data);
-            } catch (err) {
-                setError(err);
-            } finally {
-                setLoading(false);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const booksPerPage = 12;
+
+    // Fetch books from backend with server-side pagination and filtering
+    const fetchBooks = useCallback(async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/books`, {
+                params: {
+                    page: currentPage,
+                    limit: booksPerPage,
+                    search: searchTerm,
+                    status: readingStatusFilter,
+                },
+            });
+            setBooks(res.data.books);
+            setTotalPages(res.data.totalPages);
+            if (res.data.books.length === 0 && (searchTerm || readingStatusFilter)) {
+                Swal.fire({
+                    title: 'No results found!',
+                    text: 'Try adjusting your search or filters.',
+                    icon: 'warning',
+                    confirmButtonText: 'OK',
+                });
             }
-        };
+        } catch (err) {
+            setError(err);
+        } finally {
+            setLoading(false);
+        }
+    }, [currentPage, searchTerm, readingStatusFilter]);
 
+    // Call fetchBooks when currentPage, searchTerm, or readingStatusFilter changes
+    useEffect(() => {
         fetchBooks();
-    }, [ user?.accessToken ]);
+    }, [fetchBooks]);
 
-    const handleSearchChange = (e) => {
-        setSearchTerm(e.target.value);
-    };
+    // Reset to page 1 whenever filters or search change
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchTerm, readingStatusFilter]);
 
-    const handleReadingStatusChange = (e) => {
-        setReadingStatusFilter(e.target.value);
-    };
-
+    const handleSearchChange = (e) => setSearchTerm(e.target.value);
+    const handleReadingStatusChange = (e) => setReadingStatusFilter(e.target.value);
     const handleClearFilters = () => {
         setSearchTerm('');
         setReadingStatusFilter('');
     };
 
-    useEffect(() => {
-        let filtered = books;
-
-        if (searchTerm) {
-            filtered = filtered.filter(
-                (book) =>
-                    book.book_title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    book.book_author.toLowerCase().includes(searchTerm.toLowerCase())
-            );
-        }
-
-        if (readingStatusFilter) {
-            filtered = filtered.filter((book) => book.reading_status === readingStatusFilter);
-        }
-
-        // SweetAlert for no match
-        if ((searchTerm || readingStatusFilter) && filtered.length === 0) {
-            Swal.fire({
-                icon: 'info',
-                title: 'No Books Found',
-                text: 'It looks like we couldn’t find any books that match your search and filters. Would you like to try adjusting them or reset your search?',
-                confirmButtonColor: '#6366f1',
-                showCancelButton: true,
-                cancelButtonText: 'Reset Search',
-                confirmButtonText: 'Try Again',
-                cancelButtonColor: '#ff5c8d',
-                customClass: {
-                    title: 'text-lg font-semibold text-neutral',
-                    content: 'text-base text-gray-600',
-                },
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    setFilteredBooks(filtered);
-                } else if (result.isDismissed) {
-                    setSearchTerm('');
-                    setReadingStatusFilter('');
-                }
-            });
-        }
-
-        setFilteredBooks(filtered);
-    }, [searchTerm, readingStatusFilter, books]);
-
-
-    if (loading) {
-        return <LoadingSpinner />;
-    }
-
-    if (error) {
-        return <Error />;
-    }
+    if (loading) return <LoadingSpinner />;
+    if (error) return <Error />;
 
     return (
         <section className="px-6 py-10">
             <Helmet>
                 <title>BookShelf</title>
-                <meta name="description" content="Explore our collection of books, filter by reading status, and search for your favorite titles." />
+                <meta
+                    name="description"
+                    content="Explore our collection of books, filter by reading status, and search for your favorite titles."
+                />
             </Helmet>
+
             <motion.h2
                 className="text-4xl font-extrabold mb-8 text-primary text-center"
                 initial={{ opacity: 0, y: -20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5 }}
             >
-                🗃️    Bookshelf
+                Bookshelf
             </motion.h2>
 
             {/* Search & Filters */}
@@ -162,11 +138,11 @@ const Bookshelf = () => {
 
             {/* Filter Count */}
             <div className="mb-4 text-gray-600 text-sm">
-                Showing {filteredBooks.length} {filteredBooks.length === 1 ? 'book' : 'books'}
+                Showing {books.length} {books.length === 1 ? 'book' : 'books'}
             </div>
 
             {/* No Books Message */}
-            {filteredBooks.length === 0 && (
+            {books.length === 0 && (
                 <motion.div
                     className="text-center text-gray-500 mb-6"
                     initial={{ opacity: 0, y: 20 }}
@@ -195,13 +171,11 @@ const Bookshelf = () => {
                 variants={{
                     hidden: {},
                     visible: {
-                        transition: {
-                            staggerChildren: 0.1,
-                        },
+                        transition: { staggerChildren: 0.1 },
                     },
                 }}
             >
-                {filteredBooks.map((book) => (
+                {books.map((book) => (
                     <motion.div
                         key={book._id}
                         className="hover:scale-105 transition-transform duration-300"
@@ -217,6 +191,47 @@ const Bookshelf = () => {
                     </motion.div>
                 ))}
             </motion.div>
+
+            {/* Pagination Controls */}
+            <div className="flex justify-center items-center mt-8 gap-2 flex-wrap">
+                <button
+                    onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                    disabled={currentPage === 1}
+                    className={`px-4 py-2 rounded border ${currentPage === 1
+                        ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                        : 'bg-white text-primary border-primary hover:bg-primary hover:text-white transition'
+                        }`}
+                >
+                    Previous
+                </button>
+
+                {/* Show page numbers only on md and up */}
+                <div className="hidden md:flex gap-2">
+                    {Array.from({ length: totalPages }, (_, i) => (
+                        <button
+                            key={i + 1}
+                            onClick={() => setCurrentPage(i + 1)}
+                            className={`px-4 py-2 border rounded ${currentPage === i + 1
+                                ? 'bg-primary text-white'
+                                : 'bg-white text-primary border-primary hover:bg-primary hover:text-white transition'
+                                }`}
+                        >
+                            {i + 1}
+                        </button>
+                    ))}
+                </div>
+
+                <button
+                    onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                    disabled={currentPage === totalPages}
+                    className={`px-4 py-2 rounded border ${currentPage === totalPages
+                        ? 'bg-gray-300 text-gray-600 cursor-not-allowed'
+                        : 'bg-white text-primary border-primary hover:bg-primary hover:text-white transition'
+                        }`}
+                >
+                    Next
+                </button>
+            </div>
         </section>
     );
 };
