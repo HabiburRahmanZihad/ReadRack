@@ -109,29 +109,34 @@ const AddBook = () => {
     };
 
     return (
-        <section className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center gap-10 px-4 py-10 bg-base-200">
+        <section className="min-h-screen flex flex-col-reverse lg:flex-row items-center justify-center gap-10 px-6 py-12 bg-base-200">
             <Helmet>
                 <title>Add Book</title>
-                <meta name="description" content="Add a new book to your bookshelf. Share your reading journey with the world!" />
+                <meta
+                    name="description"
+                    content="Add a new book to your bookshelf. Share your reading journey with the world!"
+                />
             </Helmet>
+
             {/* Form Card */}
             <motion.div
-                className="w-full max-w-xl p-8 rounded-3xl shadow-xl border relative overflow-hidden border-primary"
-                style={{
-                    background: "linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05))",
-                    backdropFilter: "blur(15px)",
-                    WebkitBackdropFilter: "blur(15px)",
-                    borderColor: "rgba(255, 255, 255, 0.1)",
-                    borderWidth: "1px",
-                    boxShadow: "0 8px 32px 0 rgba(31, 38, 135, 0.2)",
-                }}
+                className="w-full max-w-xl p-10 rounded-3xl shadow-2xl border border-primary relative overflow-hidden
+          bg-gradient-to-br from-white/30 via-white/10 to-white/5
+          backdrop-blur-xl
+          text-neutral"
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6 }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
             >
-                <div className="absolute top-[-20px] right-[-20px] w-40 h-40 bg-gradient-to-tr from-pink-500 to-purple-500 opacity-20 rounded-full animate-pulse"></div>
+                {/* Animated Gradient Circle */}
+                <motion.div
+                    className="absolute top-[-40px] right-[-40px] w-48 h-48 rounded-full bg-gradient-to-tr from-pink-500 to-purple-600 opacity-20"
+                    animate={{ rotate: 360 }}
+                    transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+                    aria-hidden="true"
+                />
 
-                <h2 className="text-3xl font-bold text-center text-accent mb-6 flex items-center justify-center gap-2">
+                <h2 className="text-4xl font-extrabold text-center text-accent mb-8 tracking-wide drop-shadow-lg flex justify-center items-center gap-3">
                     Add a New Book
                 </h2>
 
@@ -141,18 +146,29 @@ const AddBook = () => {
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
+                    noValidate
+                    aria-label="Add new book form"
                 >
+                    {/* Dynamic Inputs */}
                     {[
                         { id: "book_title", label: "Book Title", type: "text" },
                         { id: "cover_photo", label: "Cover Photo URL", type: "url" },
                         { id: "total_page", label: "Total Pages", type: "number" },
-                        { id: "book_author", label: "Author", type: "text" }
+                        { id: "book_author", label: "Author", type: "text" },
                     ].map(({ id, label, type }) => (
-                        <div className="form-control" key={id}>
-                            <label htmlFor={id} className="label font-semibold text-accent">
+                        <motion.div
+                            className="form-control"
+                            key={id}
+                            {...inputMotionProps}
+                            tabIndex={-1}
+                        >
+                            <label
+                                htmlFor={id}
+                                className="label font-semibold text-accent tracking-wide"
+                            >
                                 {label} <span className="text-red-500">*</span>
                             </label>
-                            <motion.input
+                            <input
                                 id={id}
                                 name={id}
                                 type={type}
@@ -160,69 +176,91 @@ const AddBook = () => {
                                 onChange={handleChange}
                                 required
                                 placeholder={`Enter ${label.toLowerCase()}`}
-                                className="input input-bordered w-full bg-base-100 text-neutral border-base-300"
-                                {...inputMotionProps}
+                                className="input input-bordered w-full bg-base-100 text-neutral border-base-300
+                  focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-80
+                  transition-shadow duration-300"
+                                aria-required="true"
                             />
-                        </div>
+                        </motion.div>
                     ))}
 
-
-                    {/* User Info */}
-                    <div className="form-control">
-                        <label className="label font-semibold text-accent">Your Email</label>
+                    {/* User Info Readonly */}
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label className="label font-semibold text-accent tracking-wide">
+                            Your Email
+                        </label>
                         <input
                             type="email"
                             readOnly
                             value={user?.email || ""}
-                            className="input input-bordered w-full cursor-not-allowed bg-base-200"
+                            className="input input-bordered w-full cursor-not-allowed bg-base-200 text-neutral"
+                            aria-readonly="true"
+                            tabIndex={-1}
                         />
-                    </div>
-                    <div className="form-control">
-                        <label className="label font-semibold text-accent">Your Name</label>
+                    </motion.div>
+
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label className="label font-semibold text-accent tracking-wide">
+                            Your Name
+                        </label>
                         <input
                             type="text"
                             readOnly
                             value={user?.displayName || "Anonymous"}
-                            className="input input-bordered w-full cursor-not-allowed bg-base-200"
+                            className="input input-bordered w-full cursor-not-allowed bg-base-200 text-neutral"
+                            aria-readonly="true"
+                            tabIndex={-1}
                         />
-                    </div>
+                    </motion.div>
 
-
-                    {/* Selects */}
-                    <div className="form-control">
-                        <label className="label font-semibold text-accent">Category</label>
+                    {/* Select Category */}
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label className="label font-semibold text-accent tracking-wide">
+                            Category
+                        </label>
                         <select
                             name="book_category"
                             value={formData.book_category}
                             onChange={handleChange}
-                            className="select select-bordered w-full bg-base-100 text-neutral border-base-300"
+                            className="select select-bordered w-full bg-base-100 text-neutral border-base-300
+                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-80 transition-shadow duration-300"
+                            aria-required="true"
                         >
                             {categories.map((cat) => (
-                                <option key={cat} value={cat}>{cat}</option>
+                                <option key={cat} value={cat}>
+                                    {cat}
+                                </option>
                             ))}
                         </select>
-                    </div>
+                    </motion.div>
 
-
-                    <div className="form-control">
-                        <label className="label font-semibold text-accent">Reading Status</label>
+                    {/* Select Status */}
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label className="label font-semibold text-accent tracking-wide">
+                            Reading Status
+                        </label>
                         <select
                             name="reading_status"
                             value={formData.reading_status}
                             onChange={handleChange}
-                            className="select select-bordered w-full bg-base-100 text-neutral border-base-300"
+                            className="select select-bordered w-full bg-base-100 text-neutral border-base-300
+                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-80 transition-shadow duration-300"
+                            aria-required="true"
                         >
                             {statuses.map((status) => (
-                                <option key={status} value={status}>{status}</option>
+                                <option key={status} value={status}>
+                                    {status}
+                                </option>
                             ))}
                         </select>
-                    </div>
-
-
+                    </motion.div>
 
                     {/* Overview */}
-                    <div className="form-control">
-                        <label htmlFor="book_overview" className="label font-semibold text-accent">
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label
+                            htmlFor="book_overview"
+                            className="label font-semibold text-accent tracking-wide"
+                        >
                             Book Overview
                         </label>
                         <textarea
@@ -232,27 +270,34 @@ const AddBook = () => {
                             onChange={handleChange}
                             placeholder="Write a brief description or notes about the book"
                             rows={4}
-                            className="textarea textarea-bordered w-full resize-none bg-base-100 text-neutral border-base-300"
+                            className="textarea textarea-bordered w-full resize-none bg-base-100 text-neutral border-base-300
+                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-80 transition-shadow duration-300"
                         />
-                    </div>
+                    </motion.div>
 
-                    <div className="form-control">
-                        <label className="label font-semibold text-accent">Upvotes</label>
+                    {/* Upvotes */}
+                    <motion.div {...inputMotionProps} tabIndex={-1} className="form-control">
+                        <label className="label font-semibold text-accent tracking-wide">Upvotes</label>
                         <input
                             type="number"
                             readOnly
                             value={0}
-                            className="input input-bordered w-full cursor-not-allowed bg-base-200"
+                            className="input input-bordered w-full cursor-not-allowed bg-base-200 text-neutral"
+                            aria-readonly="true"
+                            tabIndex={-1}
                         />
-                    </div>
+                    </motion.div>
 
-                    {/* Submit */}
+                    {/* Submit Button */}
                     <motion.button
                         type="submit"
                         disabled={submitting}
-                        className="btn w-full text-lg font-semibold flex items-center justify-center gap-2 bg-primary text-base-100 border-none"
-                        whileHover={{ scale: 1.05 }}
+                        className="btn w-full text-lg font-semibold flex items-center justify-center gap-3 bg-primary text-base-100 border-none shadow-lg
+              hover:brightness-110 active:brightness-90 transition duration-200"
+                        whileHover={{ scale: 1.06 }}
                         whileTap={{ scale: 0.97 }}
+                        aria-busy={submitting}
+                        aria-disabled={submitting}
                     >
                         {submitting ? (
                             "Adding..."
@@ -270,8 +315,9 @@ const AddBook = () => {
             <motion.div
                 initial={{ opacity: 0, x: -50 }}
                 animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6 }}
-                className="w-full max-w-md flex justify-center items-center"
+                transition={{ duration: 0.7, ease: "easeOut" }}
+                className="w-full max-w-md flex justify-center items-center select-none"
+                aria-hidden="true"
             >
                 <Player autoplay loop src={addBookAnimation} className="w-72 md:w-80 lg:w-96" />
             </motion.div>
