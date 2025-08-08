@@ -10,7 +10,6 @@ import { AuthContext } from '../../Provider/AuthContext';
 import { Helmet } from 'react-helmet-async';
 import useAxiosSecure from '../../hooks/useAxiosSecure';
 
-
 const BookDetails = () => {
     const { id } = useParams();
     const { user } = useContext(AuthContext);
@@ -22,15 +21,39 @@ const BookDetails = () => {
     const [isEditing, setIsEditing] = useState(null);
     const axiosSecure = useAxiosSecure();
 
+    // Normalize status strings to consistent casing
+    const statusOptions = ['Want-to-Read', 'Reading', 'Read'];
+
+    // Fetch book details and reviews
+    const fetchBookDetails = async () => {
+        setLoading(true);
+        try {
+            const [bookRes, reviewsRes] = await Promise.all([
+                axiosSecure.get(`/books/${id}`),
+                axiosSecure.get(`/reviews/${id}`),
+            ]);
+            setBook(bookRes.data);
+            setReviews(reviewsRes.data);
+        } catch (err) {
+            console.error('Error fetching book details or reviews:', err);
+            setBook(null);
+            setReviews([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
     useEffect(() => {
         if (user?.accessToken) {
             fetchBookDetails();
         } else {
             setLoading(false);
         }
-    }, [id, user?.accessToken, axiosSecure]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [id, user?.accessToken]);
 
-    const hasUserReviewed = user && reviews.some((review) => review.user_email === user.email);
+    // Check if user already reviewed this book
+    const hasUserReviewed = user && reviews.some((r) => r.user_email === user.email);
 
     if (loading) return <LoadingSpinner />;
     if (!book) return <Error message="Unable to load book details. Please try again later." />;
@@ -42,6 +65,7 @@ const BookDetails = () => {
         return format(new Date(isoDate), "MMM d, yyyy 'at' hh:mm a");
     };
 
+    // Submit new review
     const handleReviewSubmit = async () => {
         if (!user) {
             return Swal.fire({
@@ -80,6 +104,7 @@ const BookDetails = () => {
                 review_text: newReview,
             });
 
+            // Refresh reviews
             const updatedReviews = await axiosSecure.get(`/reviews/${id}`);
             setReviews(updatedReviews.data);
             setNewReview('');
@@ -93,7 +118,6 @@ const BookDetails = () => {
                 timer: 2000,
                 timerProgressBar: true,
             });
-
         } catch (err) {
             console.error('Error posting review:', err);
             Swal.fire({
@@ -105,6 +129,7 @@ const BookDetails = () => {
         }
     };
 
+    // Update reading status
     const handleStatusChange = async (newStatus) => {
         if (reading_status === newStatus) {
             return Swal.fire({
@@ -121,6 +146,7 @@ const BookDetails = () => {
                 newStatus,
             });
 
+            // Refresh book details
             const updatedBookRes = await axiosSecure.get(`/books/${id}`);
             setBook(updatedBookRes.data);
 
@@ -141,10 +167,11 @@ const BookDetails = () => {
         }
     };
 
+    // Delete a review
     const handleReviewDelete = async (reviewId) => {
         const result = await Swal.fire({
             title: 'Are you sure?',
-            text: "Your review will be permanently deleted.",
+            text: 'Your review will be permanently deleted.',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#d33',
@@ -181,7 +208,7 @@ const BookDetails = () => {
         }
     };
 
-
+    // Edit a review
     const handleReviewEdit = async (reviewId) => {
         if (editReview.trim().length < 4) {
             return Swal.fire({
@@ -205,6 +232,7 @@ const BookDetails = () => {
             );
             setIsEditing(null);
             setEditReview('');
+
             Swal.fire({
                 icon: 'success',
                 title: 'Review Updated',
@@ -243,7 +271,7 @@ const BookDetails = () => {
 
                             {/* Tracker */}
                             <div className="flex items-center gap-4 mb-4">
-                                {['Want-to-Read', 'Reading', 'Read'].map((status, index) => (
+                                {statusOptions.map((status, index) => (
                                     <div key={status} className="flex items-center gap-2">
                                         <motion.div
                                             className={`w-4 h-4 rounded-full`}
@@ -251,20 +279,23 @@ const BookDetails = () => {
                                                 backgroundColor:
                                                     reading_status === status
                                                         ? '#6366F1' // Tailwind "bg-primary"
-                                                        : index <= ['Want-to-Read', 'Reading', 'Read'].indexOf(reading_status)
+                                                        : index <= statusOptions.indexOf(reading_status)
                                                             ? 'rgba(99, 102, 241, 0.5)' // bg-primary/50
                                                             : '#e5e7eb', // Tailwind "bg-base-300"
                                             }}
                                             transition={{ duration: 0.4 }}
                                         />
                                         <span className="text-sm">{status}</span>
-                                        {index < 2 && <div className="w-6 h-0.5 bg-base-300" />}
+                                        {index < statusOptions.length - 1 && <div className="w-6 h-0.5 bg-base-300" />}
                                     </div>
                                 ))}
                             </div>
 
                             {/* Status Buttons */}
                             <div className="flex flex-col gap-2">
+                                <button onClick={() => handleStatusChange('Want-to-Read')} className="btn btn-outline btn-info w-full">
+                                    Mark as Want to Read
+                                </button>
                                 <button onClick={() => handleStatusChange('Reading')} className="btn btn-outline btn-primary w-full">
                                     Mark as Reading
                                 </button>
@@ -315,8 +346,6 @@ const BookDetails = () => {
                     <div className="mt-6">
                         <h4 className="text-xl font-semibold text-neutral mb-3">📝 Reviews</h4>
 
-                        {/* Review Cards */}
-                        {/* Review Cards */}
                         {reviews.length === 0 ? (
                             <motion.div
                                 initial={{ opacity: 0, y: 10 }}
@@ -378,7 +407,6 @@ const BookDetails = () => {
                                 </AnimatePresence>
                             </div>
                         )}
-
 
                         {/* Review Input / Edit */}
                         <motion.div layout className="mt-4">
