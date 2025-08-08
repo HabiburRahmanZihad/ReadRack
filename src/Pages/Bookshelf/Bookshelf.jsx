@@ -18,13 +18,19 @@ const Bookshelf = () => {
     const [error, setError] = useState(null);
 
     const [searchTerm, setSearchTerm] = useState('');
+    const [submittedSearchTerm, setSubmittedSearchTerm] = useState('');
     const [readingStatusFilter, setReadingStatusFilter] = useState('');
 
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const booksPerPage = 12;
 
-    // Fetch books from backend with server-side pagination and filtering
+    // Reset page when submittedSearchTerm or readingStatusFilter changes
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [submittedSearchTerm, readingStatusFilter]);
+
+    // Fetch books from backend with pagination and filters
     const fetchBooks = useCallback(async () => {
         setLoading(true);
         setError(null);
@@ -33,13 +39,14 @@ const Bookshelf = () => {
                 params: {
                     page: currentPage,
                     limit: booksPerPage,
-                    search: searchTerm,
+                    search: submittedSearchTerm,
                     status: readingStatusFilter,
                 },
             });
             setBooks(res.data.books);
             setTotalPages(res.data.totalPages);
-            if (res.data.books.length === 0 && (searchTerm || readingStatusFilter)) {
+
+            if (res.data.books.length === 0 && (submittedSearchTerm || readingStatusFilter)) {
                 Swal.fire({
                     title: 'No results found!',
                     text: 'Try adjusting your search or filters.',
@@ -52,22 +59,31 @@ const Bookshelf = () => {
         } finally {
             setLoading(false);
         }
-    }, [currentPage, searchTerm, readingStatusFilter]);
+    }, [currentPage, submittedSearchTerm, readingStatusFilter]);
 
-    // Call fetchBooks when currentPage, searchTerm, or readingStatusFilter changes
     useEffect(() => {
         fetchBooks();
     }, [fetchBooks]);
 
-    // Reset to page 1 whenever filters or search change
-    useEffect(() => {
-        setCurrentPage(1);
-    }, [searchTerm, readingStatusFilter]);
-
     const handleSearchChange = (e) => setSearchTerm(e.target.value);
+
+    // Trigger search on Enter key or button click
+    const handleSearchSubmit = () => {
+        setSubmittedSearchTerm(searchTerm.trim());
+    };
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleSearchSubmit();
+        }
+    };
+
     const handleReadingStatusChange = (e) => setReadingStatusFilter(e.target.value);
+
     const handleClearFilters = () => {
         setSearchTerm('');
+        setSubmittedSearchTerm('');
         setReadingStatusFilter('');
     };
 
@@ -96,19 +112,28 @@ const Bookshelf = () => {
             {/* Search & Filters */}
             <div className="mb-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
                 {/* Search */}
-                <div className="flex items-center space-x-4 w-full sm:w-1/2">
-                    <div className="relative w-full">
+                <div className="flex items-center space-x-2 w-full sm:w-1/2">
+                    <div className="relative flex-grow">
                         <input
                             type="text"
                             placeholder="Search by title or author"
                             value={searchTerm}
                             onChange={handleSearchChange}
+                            onKeyDown={handleKeyDown}
                             className="input input-bordered w-full px-4 pl-10 py-2 border-primary focus:outline-none"
+                            aria-label="Search books by title or author"
                         />
-                        <span className="absolute left-3 top-3 text-gray-500">
+                        <span className="absolute left-3 top-3 text-gray-500 pointer-events-none">
                             <FiSearch />
                         </span>
                     </div>
+                    <button
+                        onClick={handleSearchSubmit}
+                        className="btn btn-primary px-4 py-2"
+                        aria-label="Submit search"
+                    >
+                        Search
+                    </button>
                 </div>
 
                 {/* Filter */}
@@ -117,6 +142,7 @@ const Bookshelf = () => {
                         value={readingStatusFilter}
                         onChange={handleReadingStatusChange}
                         className="select select-bordered w-full px-4 py-2 border-primary focus:outline-none"
+                        aria-label="Filter books by reading status"
                     >
                         <option value="">Filter by reading status</option>
                         <option value="Read">Read</option>
