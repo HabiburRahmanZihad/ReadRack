@@ -20,13 +20,16 @@ const UpdateProfile = () => {
     }, [user]);
 
     if (loading) {
-        return <LoadingSpinner></LoadingSpinner>;
+        return <LoadingSpinner />;
     }
 
     if (!user || !user.email) {
-        return <p className="text-center text-3xl mt-10 text-red-500">User not found. Please log in.</p>;
+        return (
+            <p className="text-center text-3xl mt-10 text-red-500">
+                User not found. Please log in.
+            </p>
+        );
     }
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -55,13 +58,11 @@ const UpdateProfile = () => {
         }
 
         try {
-            // 1. Update Firebase Profile
             await updateUserProfile({
                 displayName: name,
                 photoURL: photoURL || null,
             });
 
-            // 2. Update Local User State
             setUser({
                 ...user,
                 displayName: name,
@@ -79,7 +80,6 @@ const UpdateProfile = () => {
         }
 
         try {
-            // 3. Update in Backend
             await axios.patch(`${import.meta.env.VITE_API_URL}/users/${encodeURIComponent(user.email)}`, {
                 name,
                 profile_photo: photoURL || null,
@@ -110,20 +110,30 @@ const UpdateProfile = () => {
         }
     };
 
-
     return (
-        <div className="max-w-md mx-auto bg-white p-6 rounded-md shadow-md mt-8">
+        <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg mt-10 border border-gray-200">
             <Helmet>
                 <title>Update Profile</title>
-                <meta name="description" content="Update your profile information including name and photo URL." />
+                <meta
+                    name="description"
+                    content="Update your profile information including name and photo URL."
+                />
             </Helmet>
-            <h2 className="text-2xl font-semibold mb-6 text-center">Update Profile</h2>
-            <form onSubmit={handleSubmit} className="space-y-4">
+
+            <h2 className="text-3xl font-extrabold mb-8 text-center text-primary">
+                Update Profile
+            </h2>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label className="block mb-1 font-medium">Name</label>
+                    <label htmlFor="name" className="block mb-2 text-sm font-semibold text-gray-700">
+                        Name
+                    </label>
                     <input
+                        id="name"
                         type="text"
-                        className="input input-bordered w-full"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400
+              focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Your Name"
@@ -132,10 +142,14 @@ const UpdateProfile = () => {
                 </div>
 
                 <div>
-                    <label className="block mb-1 font-medium">Photo URL</label>
+                    <label htmlFor="photoURL" className="block mb-2 text-sm font-semibold text-gray-700">
+                        Photo URL
+                    </label>
                     <input
+                        id="photoURL"
                         type="url"
-                        className="input input-bordered w-full"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400
+              focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                         value={photoURL}
                         onChange={(e) => setPhotoURL(e.target.value)}
                         placeholder="Profile photo URL"
@@ -144,10 +158,13 @@ const UpdateProfile = () => {
 
                 <button
                     type="submit"
-                    className="btn btn-primary w-full"
+                    className={`w-full py-3 rounded-lg text-white font-semibold transition
+            ${!user || (name === (user.displayName || '') && photoURL === (user.photoURL || ''))
+                            ? 'bg-gray-400 cursor-not-allowed'
+                            : 'bg-primary hover:bg-primary-dark'
+                        }`}
                     disabled={
-                        !user ||
-                        (name === (user.displayName || '') && photoURL === (user.photoURL || ''))
+                        !user || (name === (user.displayName || '') && photoURL === (user.photoURL || ''))
                     }
                 >
                     Update Profile
