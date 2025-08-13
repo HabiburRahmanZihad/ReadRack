@@ -23,6 +23,7 @@ export const router = createBrowserRouter([
     {
         path: "/",
         element: <RootLayout></RootLayout>,
+        errorElement: <Error></Error>,
 
 
         children: [
