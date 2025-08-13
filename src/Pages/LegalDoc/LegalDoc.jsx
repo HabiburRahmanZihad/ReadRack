@@ -50,7 +50,7 @@ const LegalDoc = () => {
                     If you have any questions about this Privacy Policy, please contact us at <a href="mailto:privacy@readrack.com" className="text-primary hover:underline">privacy@readrack.com</a>.
                 </p>
 
-                <p className="text-sm text-base-400 mt-12">Last updated: June 2025</p>
+                <p className="text-sm text-base-400 mt-12">Last updated: August 2025</p>
             </motion.div>
         </section>
     );

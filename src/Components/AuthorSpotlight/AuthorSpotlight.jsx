@@ -125,7 +125,7 @@ const AuthorCard = ({ author }) => (
 const AuthorSpotlight = () => {
     return (
         <section className="bg-base-200 py-12 px-4 sm:px-6 lg:px-10 my-10">
-            <h2 className="text-3xl font-bold mb-8 text-center">✨ Author Spotlight</h2>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-center text-primary mb-10">✨ Author Spotlight</h2>
             <Carousel
                 responsive={responsive}
                 infinite

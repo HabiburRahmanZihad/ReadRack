@@ -53,12 +53,13 @@ const Contact = () => {
     return (
         <section className="bg-base-200 py-16 px-6 lg:px-24" aria-label="Contact Us Section">
             <Helmet>
-                <title>Contact us</title>
+                <title>Contact Us</title>
                 <meta
                     name="description"
                     content="Get in touch with ReadRack. We are here to answer your questions and assist you with any inquiries."
                 />
             </Helmet>
+
             <div className="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-12">
                 {/* Left: Contact Info */}
                 <motion.div
@@ -78,11 +79,12 @@ const Contact = () => {
                         />
                     </h2>
 
-                    <p className="text-lg text-neutral max-w-md">
+                    <p className="text-lg text-base-content max-w-md">
                         We'd love to hear from you. Whether you have a question about features,
                         trials, pricing, or anything else—our team is ready to answer all your questions.
                     </p>
-                    <div className="space-y-4 text-base-400">
+
+                    <div className="space-y-4 text-base-content/70">
                         <div className="flex items-center space-x-3">
                             <FaMapMarkerAlt className="text-primary w-5 h-5" aria-hidden="true" />
                             <span>123 ReadRack Lane, Booktown, BK 10201</span>
@@ -105,16 +107,13 @@ const Contact = () => {
                     initial={{ opacity: 0, x: 30 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ duration: 1, delay: 0.5 }}
-                    className="bg-white p-8 rounded-lg shadow-2xl space-y-6 border border-base-300"
+                    className="bg-base-100/90 p-8 rounded-xl shadow-2xl space-y-6 border border-base-300 backdrop-blur-sm"
                     onSubmit={handleSubmit}
                     aria-label="Contact form"
                     noValidate
                 >
                     <div className="form-control">
-                        <label
-                            htmlFor="name"
-                            className="label text-base font-medium text-primary"
-                        >
+                        <label htmlFor="name" className="label text-base font-medium text-primary">
                             Name
                         </label>
                         <input
@@ -123,8 +122,7 @@ const Contact = () => {
                             type="text"
                             autoComplete="name"
                             placeholder="Your Name"
-                            className="input input-bordered w-full
-                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                             required
                             disabled={isSubmitting}
                             aria-required="true"
@@ -132,10 +130,7 @@ const Contact = () => {
                     </div>
 
                     <div className="form-control">
-                        <label
-                            htmlFor="email"
-                            className="label text-base font-medium text-primary"
-                        >
+                        <label htmlFor="email" className="label text-base font-medium text-primary">
                             Email
                         </label>
                         <input
@@ -144,8 +139,7 @@ const Contact = () => {
                             type="email"
                             autoComplete="email"
                             placeholder="you@example.com"
-                            className="input input-bordered w-full
-                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
+                            className="input input-bordered w-full focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                             required
                             disabled={isSubmitting}
                             aria-required="true"
@@ -153,10 +147,7 @@ const Contact = () => {
                     </div>
 
                     <div className="form-control">
-                        <label
-                            htmlFor="message"
-                            className="label text-base font-medium text-primary"
-                        >
+                        <label htmlFor="message" className="label text-base font-medium text-primary">
                             Message
                         </label>
                         <textarea
@@ -164,8 +155,7 @@ const Contact = () => {
                             name="message"
                             rows="5"
                             placeholder="Your message..."
-                            className="textarea textarea-bordered w-full resize-none
-                focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
+                            className="textarea textarea-bordered w-full resize-none focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                             required
                             disabled={isSubmitting}
                             aria-required="true"
@@ -174,8 +164,7 @@ const Contact = () => {
 
                     <button
                         type="submit"
-                        className={`btn btn-primary w-full ${isSubmitting ? 'opacity-60 cursor-not-allowed' : 'hover:bg-primary-dark'
-                            }`}
+                        className={`btn w-full bg-gradient-to-r from-primary to-secondary text-white font-semibold rounded-md transition ${isSubmitting ? 'opacity-60 cursor-not-allowed' : 'hover:opacity-90'}`}
                         disabled={isSubmitting}
                         aria-busy={isSubmitting}
                         aria-disabled={isSubmitting}
@@ -185,6 +174,7 @@ const Contact = () => {
                 </motion.form>
             </div>
         </section>
+
     );
 };
 
