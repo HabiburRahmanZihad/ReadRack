@@ -151,7 +151,6 @@ const BookCard = ({ book, userEmail, highlight }) => {
                 </div>
             </motion.div>
         </motion.div>
-
     );
 };
 

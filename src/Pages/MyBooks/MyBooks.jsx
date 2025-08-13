@@ -40,7 +40,6 @@ const MyBooks = () => {
             });
 
             const url = `${import.meta.env.VITE_API_URL}/books/my-books?${params.toString()}`;
-            console.log('Fetching URL:', url);
 
             const response = await axios.get(url, {
                 headers: {
@@ -149,12 +148,12 @@ const MyBooks = () => {
                 <meta name="description" content="View and manage your personal book collection." />
             </Helmet>
 
-            {/* Header without search/filter */}
+            {/* Header */}
             <div className="mb-6">
-                <h1 className="text-3xl font-bold text-gray-800 mb-4">My Book Collection</h1>
+                <h1 className="text-4xl font-extrabold mb-8 text-primary text-center">My Book Collection</h1>
 
                 {pagination.totalBooks > 0 && (
-                    <p className="text-gray-600">
+                    <p className="text-base-content/80">
                         Found {pagination.totalBooks} book{pagination.totalBooks !== 1 ? 's' : ''} in your collection
                     </p>
                 )}
@@ -168,7 +167,7 @@ const MyBooks = () => {
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.3 }}
                 >
-                    <p className="text-gray-500 text-xl">
+                    <p className="text-base-content/60 text-xl">
                         <Typewriter
                             words={["You haven't added any books yet. Start your collection today!"]}
                             loop={1}
@@ -189,22 +188,20 @@ const MyBooks = () => {
                         animate="visible"
                         variants={{
                             hidden: {},
-                            visible: {
-                                transition: {
-                                    staggerChildren: 0.1,
-                                },
-                            },
+                            visible: { transition: { staggerChildren: 0.1 } },
                         }}
                     >
                         {books.map((book) => (
                             <motion.div
                                 key={book._id}
-                                variants={{
-                                    hidden: { opacity: 0, y: 20 },
-                                    visible: { opacity: 1, y: 0 },
-                                }}
+                                variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
                             >
-                                <MyBookSingleCard book={book} onDelete={handleDelete} />
+                                {/* MyBookSingleCard should use theme-friendly classes */}
+                                <MyBookSingleCard
+                                    book={book}
+                                    onDelete={handleDelete}
+                                    className="bg-base-100 text-base-content border border-primary hover:border-secondary shadow-lg rounded-xl overflow-hidden transition-all"
+                                />
                             </motion.div>
                         ))}
                     </motion.div>
@@ -219,19 +216,19 @@ const MyBooks = () => {
                             <button
                                 onClick={() => handlePageChange(pagination.currentPage - 1)}
                                 disabled={pagination.currentPage === 1}
-                                className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                className="px-4 py-2 border border-base-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-base-200 transition"
                             >
                                 Previous
                             </button>
 
-                            <span className="px-4 py-2 text-gray-700">
+                            <span className="px-4 py-2 text-base-content/80">
                                 Page {pagination.currentPage} of {pagination.totalPages}
                             </span>
 
                             <button
                                 onClick={() => handlePageChange(pagination.currentPage + 1)}
                                 disabled={pagination.currentPage === pagination.totalPages}
-                                className="px-4 py-2 border border-gray-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-gray-50"
+                                className="px-4 py-2 border border-base-300 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed hover:bg-base-200 transition"
                             >
                                 Next
                             </button>
@@ -240,6 +237,7 @@ const MyBooks = () => {
                 </>
             )}
         </motion.div>
+
     );
 };
 
