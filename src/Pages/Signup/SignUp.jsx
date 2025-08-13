@@ -175,7 +175,10 @@ const SignUp = () => {
         <section className="min-h-[calc(100vh-300px)] bg-gradient-to-br from-base-200 to-base-100 flex flex-col lg:flex-row items-center justify-center px-4 pb-10 md:pt-10">
             <Helmet>
                 <title>Sign Up</title>
-                <meta name="description" content="Create your account on ReadRack. Join our community of book lovers and start sharing your bookshelf today!" />
+                <meta
+                    name="description"
+                    content="Create your account on ReadRack. Join our community of book lovers and start sharing your bookshelf today!"
+                />
             </Helmet>
 
             {/* Animation */}
@@ -193,7 +196,7 @@ const SignUp = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="w-full lg:w-1/2 max-w-xl bg-white/90 p-6 md:p-10 rounded-2xl shadow-2xl border border-primary backdrop-blur-sm"
+                className="w-full lg:w-1/2 max-w-xl bg-base-100/90 p-6 md:p-10 rounded-2xl shadow-2xl border border-primary backdrop-blur-sm"
             >
                 <h2 className="text-4xl font-extrabold text-primary mb-8 text-center tracking-tight">
                     Create Account
@@ -202,12 +205,12 @@ const SignUp = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Name */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Name</label>
+                        <label className="block text-sm font-medium text-base-content mb-2">Name</label>
                         <input
                             type="text"
                             name="name"
                             required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                            className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={formData.name}
                             onChange={handleChange}
                             placeholder="Your name"
@@ -217,12 +220,12 @@ const SignUp = () => {
 
                     {/* Email */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <label className="block text-sm font-medium text-base-content mb-2">Email</label>
                         <input
                             type="email"
                             name="email"
                             required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                            className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={formData.email}
                             onChange={handleChange}
                             placeholder="you@example.com"
@@ -232,11 +235,11 @@ const SignUp = () => {
 
                     {/* Photo URL */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Photo URL</label>
+                        <label className="block text-sm font-medium text-base-content mb-2">Photo URL</label>
                         <input
                             type="url"
                             name="photoURL"
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                            className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={formData.photoURL}
                             onChange={handleChange}
                             placeholder="https://example.com/photo.jpg"
@@ -246,13 +249,13 @@ const SignUp = () => {
 
                     {/* Password */}
                     <div>
-                        <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <label className="block text-sm font-medium text-base-content mb-2">Password</label>
                         <div className="relative">
                             <input
                                 type={showPassword ? 'text' : 'password'}
                                 name="password"
                                 required
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow pr-10"
+                                className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow pr-10"
                                 value={formData.password}
                                 onChange={handleChange}
                                 placeholder="••••••••"
@@ -261,7 +264,7 @@ const SignUp = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-3 flex items-center text-base-400 hover:text-primary"
+                                className="absolute inset-y-0 right-3 flex items-center text-base-content/60 hover:text-primary"
                                 disabled={loading}
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -282,9 +285,9 @@ const SignUp = () => {
 
                 {/* Divider */}
                 <div className="flex items-center my-6">
-                    <hr className="flex-grow border-gray-300" />
-                    <span className="px-3 text-sm text-gray-500">or</span>
-                    <hr className="flex-grow border-gray-300" />
+                    <hr className="flex-grow border-base-300" />
+                    <span className="px-3 text-sm text-base-content/50">or</span>
+                    <hr className="flex-grow border-base-300" />
                 </div>
 
                 {/* Google Auth Button */}
@@ -292,7 +295,7 @@ const SignUp = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleGoogleLogin}
-                    className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-md hover:bg-gray-100 transition text-neutral"
+                    className="w-full flex items-center justify-center gap-3 py-3 border border-base-300 rounded-md hover:bg-base-200 transition text-base-content"
                     disabled={loading}
                 >
                     <FcGoogle className="text-xl" />
@@ -302,7 +305,7 @@ const SignUp = () => {
                 </motion.button>
 
                 {/* Sign In Link */}
-                <p className="text-sm text-center text-base-400 mt-6">
+                <p className="text-sm text-center text-base-content/70 mt-6">
                     Already have an account?{' '}
                     <Link to="/signin" className="text-primary font-medium hover:underline">
                         Sign In
@@ -310,6 +313,7 @@ const SignUp = () => {
                 </p>
             </motion.div>
         </section>
+
     );
 };
 
