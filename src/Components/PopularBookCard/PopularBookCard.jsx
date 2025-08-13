@@ -20,6 +20,7 @@ const PopularBookCard = ({ book }) => {
             animate="visible"
             whileHover={{ scale: 1.03 }}
         >
+            {/* Cover Image */}
             <motion.div className="relative w-full aspect-square bg-base-200 overflow-hidden group">
                 <motion.img
                     src={cover_photo}
@@ -29,19 +30,20 @@ const PopularBookCard = ({ book }) => {
                 />
             </motion.div>
 
-            <motion.div className="p-5 bg-white shadow-md rounded-t-xl -mt-4 relative z-10">
-                <h3 className="text-lg font-bold text-neutral line-clamp-2 mb-1">{book_title}</h3>
+            {/* Card Content */}
+            <motion.div className="p-5 bg-base-100 shadow-md rounded-t-xl -mt-4 relative z-10">
+                <h3 className="text-lg font-bold text-base-content line-clamp-2 mb-1">{book_title}</h3>
                 <p className="text-sm italic text-accent mb-2">by {book_author}</p>
 
                 <div className="mb-2 flex items-center justify-between">
                     <span className="badge badge-secondary text-xs px-3 py-1">{book_category}</span>
-                    <div className="flex items-center text-sm text-neutral gap-1">
+                    <div className="flex items-center text-sm text-base-content gap-1">
                         <FaThumbsUp className="text-primary" />
                         <span>{upvote}</span>
                     </div>
                 </div>
 
-                <p className="text-sm text-neutral mb-4">{book_overview}</p>
+                <p className="text-sm text-base-content mb-4">{book_overview}</p>
 
                 <Link
                     to={`/books/${_id}`}
@@ -53,6 +55,7 @@ const PopularBookCard = ({ book }) => {
             </motion.div>
         </motion.div>
     );
+
 };
 
 export default PopularBookCard;

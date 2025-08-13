@@ -47,7 +47,7 @@
     /* Warm, rich brown for secondary buttons and accents */
     --color-accent: #FFD54F;
     /* Soft golden-yellow accent for borders, icons, or links */
-    --color-neutral: #1A1A1A;
+    --color-neutral: #E0E0E0;
     /* Near-black neutral background for cards and surfaces */
     --color-base-100: #0E0E0E;
     /* Main background color */
@@ -71,7 +71,12 @@
     font-family: 'Inter', sans-serif;
 }
 
-h1,h2,h3,h4,h5,h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
     font-family: 'Merriweather', serif;
 }
 
