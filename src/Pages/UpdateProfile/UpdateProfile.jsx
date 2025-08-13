@@ -111,7 +111,7 @@ const UpdateProfile = () => {
     };
 
     return (
-        <div className="max-w-md mx-auto bg-white p-8 rounded-xl shadow-lg mt-10 border border-gray-200">
+        <div className="max-w-md mx-auto bg-base-100 p-8 rounded-xl shadow-lg mt-10 border border-base-300">
             <Helmet>
                 <title>Update Profile</title>
                 <meta
@@ -126,14 +126,14 @@ const UpdateProfile = () => {
 
             <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
-                    <label htmlFor="name" className="block mb-2 text-sm font-semibold text-gray-700">
+                    <label htmlFor="name" className="block mb-2 text-sm font-semibold text-base-content">
                         Name
                     </label>
                     <input
                         id="name"
                         type="text"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400
-              focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
+                        className="w-full px-4 py-3 border border-base-300 rounded-lg shadow-sm placeholder:text-base-content/50
+                        focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="Your Name"
@@ -142,14 +142,14 @@ const UpdateProfile = () => {
                 </div>
 
                 <div>
-                    <label htmlFor="photoURL" className="block mb-2 text-sm font-semibold text-gray-700">
+                    <label htmlFor="photoURL" className="block mb-2 text-sm font-semibold text-base-content">
                         Photo URL
                     </label>
                     <input
                         id="photoURL"
                         type="url"
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg shadow-sm placeholder-gray-400
-              focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
+                        className="w-full px-4 py-3 border border-base-300 rounded-lg shadow-sm placeholder:text-base-content/50
+                        focus:outline-none focus:ring-2 focus:ring-primary focus:ring-opacity-70 transition"
                         value={photoURL}
                         onChange={(e) => setPhotoURL(e.target.value)}
                         placeholder="Profile photo URL"
@@ -159,7 +159,7 @@ const UpdateProfile = () => {
                 <button
                     type="submit"
                     className={`w-full py-3 rounded-lg text-white font-semibold transition
-            ${!user || (name === (user.displayName || '') && photoURL === (user.photoURL || ''))
+                    ${!user || (name === (user.displayName || '') && photoURL === (user.photoURL || ''))
                             ? 'bg-gray-400 cursor-not-allowed'
                             : 'bg-primary hover:bg-primary-dark'
                         }`}
