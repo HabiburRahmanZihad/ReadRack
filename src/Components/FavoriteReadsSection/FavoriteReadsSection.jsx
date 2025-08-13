@@ -36,7 +36,7 @@ const FavoriteReadsSection = () => {
     }, [inView, isClient]);
 
     return (
-        <section className="bg-base-200 text-base-content py-16 lg:py-24 mt-16 lg:mt-24">
+        <section className="bg-base-100 text-base-content py-16 lg:py-24 mt-16 lg:mt-24">
             <div className="max-w-7xl mx-auto px-6 lg:flex items-center gap-12">
                 {/* Left: Image with animation */}
                 <div className="lg:w-1/2 mb-10 lg:mb-0">

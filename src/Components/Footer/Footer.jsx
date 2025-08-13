@@ -5,7 +5,7 @@ import footerImg from '../../assets/AllPic/noBgColor2.png';
 
 const Footer = () => {
     return (
-        <footer className="bg-black text-base-100 py-12 px-6">
+        <footer className="bg-base-200 text-base-content py-12 px-6">
 
             <div className="max-w-7xl mx-auto flex flex-col items-center space-y-10 md:flex-row md:justify-between md:items-center md:space-y-0 lg:space-x-20">
                 {/* Logo and Branding */}
@@ -16,26 +16,27 @@ const Footer = () => {
                             alt="ReadRack Logo"
                             className="mx-auto md:mx-0 w-32 h-12 mb-2"
                         />
-                        <h1 className="font-bold text-2xl text-primary">ReadRack</h1></Link>
+                        <h1 className="font-bold text-2xl text-primary">ReadRack</h1>
+                    </Link>
                     <p className="italic text-sm text-secondary">“Stack your stories. Share your shelves.”</p>
-                    <p className="text-xs text-base-300 mt-1">Because every book deserves a space.</p>
+                    <p className="text-xs text-base-content/70 mt-1">Because every book deserves a space.</p>
                 </div>
 
                 {/* Navigation Links */}
                 <nav className="md:flex-1">
                     <ul className="flex flex-col items-center space-y-3 md:flex-row md:space-y-0 md:space-x-6 md:justify-center lg:justify-start">
                         <li>
-                            <Link to="/about-us" className="link link-hover text-base-100">
+                            <Link to="/about-us" className="link link-hover text-base-content">
                                 About Us
                             </Link>
                         </li>
                         <li>
-                            <Link to="/contact-us" className="link link-hover text-base-100">
+                            <Link to="/contact-us" className="link link-hover text-base-content">
                                 Contact Us
                             </Link>
                         </li>
                         <li>
-                            <Link to="/legal-doc" className="link link-hover text-base-100">
+                            <Link to="/legal-doc" className="link link-hover text-base-content">
                                 Privacy Policy
                             </Link>
                         </li>
@@ -43,10 +44,8 @@ const Footer = () => {
                 </nav>
 
                 {/* Social Media Icons */}
-                <div className="md:flex-1   text-lg space-y-1 lg:max-w-xs">
-
-                    <p className="font-semibold pl-12 text-base-100">Follow Us: </p>
-
+                <div className="md:flex-1 text-lg space-y-1 lg:max-w-xs">
+                    <p className="font-semibold pl-12 text-base-content">Follow Us:</p>
                     <div className="mt-10 flex justify-center md:justify-start space-x-6 max-w-7xl mx-auto px-6">
                         <a href="https://twitter.com/readrack" target="_blank" rel="noopener noreferrer">
                             <CiTwitter className="w-8 h-8 text-primary hover:text-secondary transition" />
@@ -60,17 +59,16 @@ const Footer = () => {
                             <FiFacebook className="w-8 h-8 text-primary hover:text-secondary transition" />
                         </a>
                     </div>
-
                 </div>
             </div>
 
             {/* Copyright */}
-            <aside className="mt-10 text-center text-xs text-base-300">
+            <aside className="mt-10 text-center text-xs text-base-content/70">
                 <p>© {new Date().getFullYear()} ReadRack. All rights reserved.</p>
             </aside>
-
         </footer>
     );
+
 };
 
 export default Footer;
