@@ -83,7 +83,7 @@ const AboutUs = () => {
 
                     {/* Team Member 1 */}
                     <motion.article
-                        className="group relative flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md border border-primary transition-all duration-300 hover:shadow-xl"
+                        className="group relative flex flex-col items-center text-center bg-base-100 p-6 rounded-lg shadow-md border border-base-300 transition-all duration-300 hover:shadow-xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 4.2 }}
@@ -98,9 +98,9 @@ const AboutUs = () => {
                         </div>
 
                         <h4 id="profile-name-2" className="text-lg font-semibold text-primary mb-1">Rohit Ahemed</h4>
-                        <p className="text-sm text-base-400 italic mb-4 tracking-wide">Product Lead & UX Strategist</p>
+                        <p className="text-sm text-base-content/60 italic mb-4 tracking-wide">Product Lead & UX Strategist</p>
 
-                        <ul className="text-sm text-neutral space-y-3 w-full">
+                        <ul className="text-sm text-base-content space-y-3 w-full">
                             <li className="flex items-center space-x-2">
                                 <FaMapMarkerAlt className="w-5 h-5 text-primary" aria-hidden="true" />
                                 <span>Chittagong, Bangladesh</span>
@@ -111,7 +111,7 @@ const AboutUs = () => {
                             </li>
                             <li className="flex items-center space-x-2">
                                 <FaEnvelope className="w-5 h-5 text-primary" aria-hidden="true" />
-                                <a href="mailto:rohit@readrack.com" className="text-base-400 hover:text-primary transition-colors">
+                                <a href="mailto:rohit@readrack.com" className="text-base-content/60 hover:text-primary transition-colors">
                                     rohit@readrack.com
                                 </a>
                             </li>
@@ -123,40 +123,20 @@ const AboutUs = () => {
 
                         {/* Social Media Icons */}
                         <div className="flex justify-center space-x-4 mt-4">
-                            <a
-                                href="https://facebook.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Facebook"
-                                className="text-primary hover:text-blue-600 transition-colors text-lg"
-                            >
+                            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                                className="text-primary hover:text-blue-600 transition-colors text-lg">
                                 <FaFacebookF />
                             </a>
-                            <a
-                                href="https://instagram.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Instagram"
-                                className="text-primary hover:text-pink-500 transition-colors text-lg"
-                            >
+                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                                className="text-primary hover:text-pink-500 transition-colors text-lg">
                                 <FaInstagram />
                             </a>
-                            <a
-                                href="https://twitter.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Twitter"
-                                className="text-primary hover:text-blue-400 transition-colors text-lg"
-                            >
+                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                                className="text-primary hover:text-blue-400 transition-colors text-lg">
                                 <FaTwitter />
                             </a>
-                            <a
-                                href="https://youtube.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="YouTube"
-                                className="text-primary hover:text-red-500 transition-colors text-lg"
-                            >
+                            <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+                                className="text-primary hover:text-red-500 transition-colors text-lg">
                                 <FaYoutube />
                             </a>
                         </div>
@@ -164,7 +144,7 @@ const AboutUs = () => {
 
                     {/* Team Member 2 */}
                     <motion.article
-                        className="group relative flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md border border-primary transition-all duration-300 hover:shadow-xl"
+                        className="group relative flex flex-col items-center text-center bg-base-100 p-6 rounded-lg shadow-md border border-base-300 transition-all duration-300 hover:shadow-xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 4 }}
@@ -179,9 +159,9 @@ const AboutUs = () => {
                         </div>
 
                         <h4 id="profile-name-1" className="text-lg font-semibold text-primary mb-1">Habibur Rahman Zihad</h4>
-                        <p className="text-sm text-base-400 italic mb-4 tracking-wide">Founder & CEO</p>
+                        <p className="text-sm text-base-content/60 italic mb-4 tracking-wide">Founder & CEO</p>
 
-                        <ul className="text-sm text-neutral space-y-3 w-full">
+                        <ul className="text-sm text-base-content space-y-3 w-full">
                             <li className="flex items-center space-x-2">
                                 <FaMapMarkerAlt className="w-5 h-5 text-primary" aria-hidden="true" />
                                 <span>Chittagong, Bangladesh</span>
@@ -192,10 +172,7 @@ const AboutUs = () => {
                             </li>
                             <li className="flex items-center space-x-2">
                                 <FaEnvelope className="w-5 h-5 text-primary" aria-hidden="true" />
-                                <a
-                                    href="mailto:habib@readrack.com"
-                                    className="text-base-400 hover:text-primary transition-colors"
-                                >
+                                <a href="mailto:habib@readrack.com" className="text-base-content/60 hover:text-primary transition-colors">
                                     habib@readrack.com
                                 </a>
                             </li>
@@ -207,49 +184,28 @@ const AboutUs = () => {
 
                         {/* Social Media Icons */}
                         <div className="flex justify-center space-x-4 mt-4">
-                            <a
-                                href="https://www.facebook.com/habiburrahmanzihad.zihad"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Facebook"
-                                className="text-primary hover:text-blue-600 transition-colors text-lg"
-                            >
+                            <a href="https://www.facebook.com/habiburrahmanzihad.zihad" target="_blank" rel="noopener noreferrer"
+                                aria-label="Facebook" className="text-primary hover:text-blue-600 transition-colors text-lg">
                                 <FaFacebookF />
                             </a>
-                            <a
-                                href="https://instagram.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Instagram"
-                                className="text-primary hover:text-pink-500 transition-colors text-lg"
-                            >
+                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                                className="text-primary hover:text-pink-500 transition-colors text-lg">
                                 <FaInstagram />
                             </a>
-                            <a
-                                href="https://x.com/xihad_xihad"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Twitter"
-                                className="text-primary hover:text-blue-400 transition-colors text-lg"
-                            >
+                            <a href="https://x.com/xihad_xihad" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                                className="text-primary hover:text-blue-400 transition-colors text-lg">
                                 <FaTwitter />
                             </a>
-                            <a
-                                href="https://www.youtube.com/@xihadxone"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="YouTube"
-                                className="text-primary hover:text-red-500 transition-colors text-lg"
-                            >
+                            <a href="https://www.youtube.com/@xihadxone" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+                                className="text-primary hover:text-red-500 transition-colors text-lg">
                                 <FaYoutube />
                             </a>
                         </div>
-
                     </motion.article>
 
                     {/* Team Member 3 */}
                     <motion.article
-                        className="group relative flex flex-col items-center text-center bg-white p-6 rounded-lg shadow-md border border-primary transition-all duration-300 hover:shadow-xl"
+                        className="group relative flex flex-col items-center text-center bg-base-100 p-6 rounded-lg shadow-md border border-base-300 transition-all duration-300 hover:shadow-xl"
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 4.4 }}
@@ -264,9 +220,9 @@ const AboutUs = () => {
                         </div>
 
                         <h4 id="profile-name-3" className="text-lg font-semibold text-primary mb-1">Saimon Uddin Imam</h4>
-                        <p className="text-sm text-base-400 italic mb-4 tracking-wide">Community Manager & Content Creator</p>
+                        <p className="text-sm text-base-content/60 italic mb-4 tracking-wide">Community Manager & Content Creator</p>
 
-                        <ul className="text-sm text-neutral space-y-3 w-full">
+                        <ul className="text-sm text-base-content space-y-3 w-full">
                             <li className="flex items-center space-x-2">
                                 <FaMapMarkerAlt className="w-5 h-5 text-primary" aria-hidden="true" />
                                 <span>Chittagong, Bangladesh</span>
@@ -277,7 +233,7 @@ const AboutUs = () => {
                             </li>
                             <li className="flex items-center space-x-2">
                                 <FaEnvelope className="w-5 h-5 text-primary" aria-hidden="true" />
-                                <a href="mailto:saimon@readrack.com" className="text-base-400 hover:text-primary transition-colors">
+                                <a href="mailto:saimon@readrack.com" className="text-base-content/60 hover:text-primary transition-colors">
                                     saimon@readrack.com
                                 </a>
                             </li>
@@ -289,40 +245,20 @@ const AboutUs = () => {
 
                         {/* Social Media Icons */}
                         <div className="flex justify-center space-x-4 mt-4">
-                            <a
-                                href="https://facebook.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Facebook"
-                                className="text-primary hover:text-blue-600 transition-colors text-lg"
-                            >
+                            <a href="https://facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                                className="text-primary hover:text-blue-600 transition-colors text-lg">
                                 <FaFacebookF />
                             </a>
-                            <a
-                                href="https://instagram.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Instagram"
-                                className="text-primary hover:text-pink-500 transition-colors text-lg"
-                            >
+                            <a href="https://instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+                                className="text-primary hover:text-pink-500 transition-colors text-lg">
                                 <FaInstagram />
                             </a>
-                            <a
-                                href="https://twitter.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="Twitter"
-                                className="text-primary hover:text-blue-400 transition-colors text-lg"
-                            >
+                            <a href="https://twitter.com/" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                                className="text-primary hover:text-blue-400 transition-colors text-lg">
                                 <FaTwitter />
                             </a>
-                            <a
-                                href="https://youtube.com/"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label="YouTube"
-                                className="text-primary hover:text-red-500 transition-colors text-lg"
-                            >
+                            <a href="https://youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube"
+                                className="text-primary hover:text-red-500 transition-colors text-lg">
                                 <FaYoutube />
                             </a>
                         </div>
