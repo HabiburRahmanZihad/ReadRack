@@ -4,6 +4,7 @@ import FAQSection from "../../Components/FAQSection/FAQSection";
 import FavoriteReadsSection from "../../Components/FavoriteReadsSection/FavoriteReadsSection";
 import FeaturedCategories from "../../Components/FeaturedCategories/FeaturedCategories";
 import PopularBooks from "../../Components/PopularBooks/PopularBooks";
+import ReaderTestimonials from '../../Components/ReaderTestimonials/ReaderTestimonials';
 
 const Home = () => {
     return (
@@ -17,6 +18,7 @@ const Home = () => {
             <PopularBooks></PopularBooks>
             <FeaturedCategories></FeaturedCategories>
             <FAQSection></FAQSection>
+            <ReaderTestimonials></ReaderTestimonials>
             <FavoriteReadsSection></FavoriteReadsSection>
         </div>
     );
