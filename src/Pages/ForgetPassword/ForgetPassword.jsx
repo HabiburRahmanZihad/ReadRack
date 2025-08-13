@@ -86,20 +86,22 @@ const ForgetPassword = () => {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="w-full lg:w-1/2 max-w-xl bg-white/90 p-6 md:p-10 rounded-xl shadow-xl border border-primary backdrop-blur-sm"
+                className="w-full lg:w-1/2 max-w-xl bg-base-100/90 p-6 md:p-10 rounded-xl shadow-xl border border-primary backdrop-blur-sm"
             >
-                <h2 className="text-3xl font-bold text-primary mb-6 text-center">Reset Your Password</h2>
+                <h2 className="text-3xl font-bold text-primary mb-6 text-center">
+                    Reset Your Password
+                </h2>
 
                 <form onSubmit={handleSubmit} className="space-y-5">
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-neutral mb-2">
+                        <label htmlFor="email" className="block text-sm font-medium text-base-content mb-2">
                             Email Address
                         </label>
                         <input
                             id="email"
                             type="email"
                             required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                            className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
@@ -116,7 +118,7 @@ const ForgetPassword = () => {
                     </button>
                 </form>
 
-                <p className="text-sm text-center text-base-400 mt-6">
+                <p className="text-sm text-center text-base-content/70 mt-6">
                     Remember your password?{' '}
                     <Link to="/signin" className="text-primary hover:underline font-medium">
                         Sign In
@@ -124,6 +126,7 @@ const ForgetPassword = () => {
                 </p>
             </motion.div>
         </section>
+
     );
 
 };
