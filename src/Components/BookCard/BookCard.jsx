@@ -85,7 +85,9 @@ const BookCard = ({ book, userEmail, highlight }) => {
 
     return (
         <motion.div
-            className={`bg-base-100 rounded-xl shadow-lg overflow-hidden max-w-xs mx-auto transition-all border ${highlight ? 'border-2 border-yellow-400 bg-yellow-50' : 'border-primary'
+            className={`bg-base-100 rounded-xl shadow-lg overflow-hidden max-w-xs mx-auto transition-all border ${highlight
+                    ? 'border-2 border-primary/80 bg-primary/20'
+                    : 'border-primary'
                 }`}
             variants={{
                 hidden: { opacity: 0, y: 30 },
@@ -119,10 +121,10 @@ const BookCard = ({ book, userEmail, highlight }) => {
 
             {/* Book details */}
             <motion.div
-                className="p-5 bg-white shadow-md rounded-t-xl -mt-4 relative z-10"
+                className="p-5 bg-base-100 shadow-md rounded-t-xl -mt-4 relative z-10"
                 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
-                <h3 className="text-lg font-bold text-neutral line-clamp-2 mb-1">{book_title}</h3>
+                <h3 className="text-lg font-bold text-base-content line-clamp-2 mb-1">{book_title}</h3>
                 <p className="text-sm italic text-accent mb-2">by {book_author}</p>
 
                 <div className="mb-4">
@@ -137,7 +139,7 @@ const BookCard = ({ book, userEmail, highlight }) => {
                         <FaThumbsUp />
                         {user_email === userEmail ? 'Cannot Upvote Your Own Book' : isUpvoting ? 'Upvoting...' : 'Upvote'}
                     </button>
-                    <p className="text-sm text-neutral mt-2">{currentUpvotes} Upvotes</p>
+                    <p className="text-sm text-base-content mt-2">{currentUpvotes} Upvotes</p>
 
                     <Link
                         to={`/books/${_id}`}
@@ -149,6 +151,7 @@ const BookCard = ({ book, userEmail, highlight }) => {
                 </div>
             </motion.div>
         </motion.div>
+
     );
 };
 
