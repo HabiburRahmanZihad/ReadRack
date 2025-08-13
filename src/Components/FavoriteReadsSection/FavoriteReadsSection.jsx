@@ -36,7 +36,7 @@ const FavoriteReadsSection = () => {
     }, [inView, isClient]);
 
     return (
-        <section className="bg-neutral text-white py-16 lg:py-24 mt-16 lg:mt-24">
+        <section className="bg-base-200 text-base-content py-16 lg:py-24 mt-16 lg:mt-24">
             <div className="max-w-7xl mx-auto px-6 lg:flex items-center gap-12">
                 {/* Left: Image with animation */}
                 <div className="lg:w-1/2 mb-10 lg:mb-0">
@@ -54,13 +54,13 @@ const FavoriteReadsSection = () => {
                 <div ref={ref} className="lg:w-1/2 space-y-6">
                     <h2 className="text-4xl lg:text-5xl font-bold leading-tight">
                         Organize your{" "}
-                        <span className="text-[#D4AF37]">reading journey</span>{" "}
-                        <span className="text-[#D4AF37]">with ease!</span>
+                        <span className="text-primary">reading journey</span>{" "}
+                        <span className="text-primary">with ease!</span>
                     </h2>
 
-                    <p className="text-lg leading-relaxed text-white/90">
+                    <p className="text-lg leading-relaxed text-base-content/90">
                         Build your own bookshelf, follow your reading journey, and connect with fellow book lovers.{" "}
-                        <span className="text-[#D4AF37] font-medium">
+                        <span className="text-primary font-medium">
                             {isClient && (
                                 <Typewriter
                                     words={[
@@ -82,7 +82,7 @@ const FavoriteReadsSection = () => {
                     <div className="flex flex-wrap gap-8 mt-8">
                         {stats.map((stat, i) => (
                             <div key={i} className="text-left">
-                                <p className="text-3xl font-bold text-[#D4AF37]">
+                                <p className="text-3xl font-bold text-primary">
                                     {isClient && startAnimation ? (
                                         <CountUp
                                             start={0}
@@ -103,7 +103,7 @@ const FavoriteReadsSection = () => {
                     <Link
                         to="/bookshelf"
                         aria-label="Explore your bookshelf"
-                        className="inline-block mt-10 border border-[#D4AF37] text-white px-6 py-3 rounded-lg hover:bg-[#D4AF37]/10 transition duration-300"
+                        className="inline-block mt-10 border border-primary text-base-content px-6 py-3 rounded-lg hover:bg-primary/10 transition duration-300"
                     >
                         Explore More
                     </Link>
