@@ -128,7 +128,10 @@ const SignIn = () => {
         <section className="min-h-[calc(100vh-300px)] bg-gradient-to-br from-base-200 to-base-100 flex flex-col lg:flex-row items-center justify-center px-4 pb-10 md:pt-10">
             <Helmet>
                 <title>Sign In - ReadRack</title>
-                <meta name="description" content="Sign in to ReadRack to access your bookshelf, manage your books, and connect with the reading community." />
+                <meta
+                    name="description"
+                    content="Sign in to ReadRack to access your bookshelf, manage your books, and connect with the reading community."
+                />
             </Helmet>
 
             {/* Animation section */}
@@ -146,7 +149,7 @@ const SignIn = () => {
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6, delay: 0.2 }}
-                className="w-full lg:w-1/2 max-w-xl bg-white/90 p-6 md:p-10 rounded-2xl shadow-2xl border border-primary backdrop-blur-sm"
+                className="w-full lg:w-1/2 max-w-xl bg-base-100/90 p-6 md:p-10 rounded-2xl shadow-2xl border border-primary backdrop-blur-sm"
             >
                 <h2 className="text-4xl font-extrabold text-primary mb-8 text-center tracking-tight">
                     Welcome Back
@@ -155,12 +158,14 @@ const SignIn = () => {
                 <form onSubmit={handleSubmit} className="space-y-6">
                     {/* Email */}
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">Email</label>
+                        <label htmlFor="email" className="block text-sm font-medium text-base-content mb-2">
+                            Email
+                        </label>
                         <input
                             id="email"
                             type="email"
                             required
-                            className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
+                            className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             placeholder="you@example.com"
@@ -170,13 +175,15 @@ const SignIn = () => {
 
                     {/* Password */}
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                        <label htmlFor="password" className="block text-sm font-medium text-base-content mb-2">
+                            Password
+                        </label>
                         <div className="relative">
                             <input
                                 id="password"
                                 type={showPassword ? 'text' : 'password'}
                                 required
-                                className="w-full px-4 py-3 rounded-md border border-gray-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow pr-10"
+                                className="w-full px-4 py-3 rounded-md border border-base-300 focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 transition-shadow pr-10"
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
                                 placeholder="••••••••"
@@ -185,7 +192,7 @@ const SignIn = () => {
                             <button
                                 type="button"
                                 onClick={() => setShowPassword(!showPassword)}
-                                className="absolute inset-y-0 right-3 flex items-center text-base-400 hover:text-primary"
+                                className="absolute inset-y-0 right-3 flex items-center text-base-content/60 hover:text-primary"
                                 disabled={loading}
                             >
                                 {showPassword ? <FaEyeSlash /> : <FaEye />}
@@ -195,7 +202,7 @@ const SignIn = () => {
 
                     {/* Forgot link */}
                     <div className="text-right text-sm">
-                        <Link to="/forgot-password" className="text-base-400 hover:text-primary hover:underline">
+                        <Link to="/forgot-password" className="text-base-content/70 hover:text-primary hover:underline">
                             Forgot password?
                         </Link>
                     </div>
@@ -213,9 +220,9 @@ const SignIn = () => {
 
                 {/* Divider */}
                 <div className="flex items-center my-6">
-                    <hr className="flex-grow border-gray-300" />
-                    <span className="px-3 text-sm text-gray-500">or</span>
-                    <hr className="flex-grow border-gray-300" />
+                    <hr className="flex-grow border-base-300" />
+                    <span className="px-3 text-sm text-base-content/50">or</span>
+                    <hr className="flex-grow border-base-300" />
                 </div>
 
                 {/* Google button */}
@@ -223,7 +230,7 @@ const SignIn = () => {
                     whileHover={{ scale: 1.03 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleGoogleLogin}
-                    className="w-full flex items-center justify-center gap-3 py-3 border border-gray-300 rounded-md hover:bg-gray-100 transition text-neutral"
+                    className="w-full flex items-center justify-center gap-3 py-3 border border-base-300 rounded-md hover:bg-base-200 transition text-base-content"
                     disabled={loading}
                 >
                     <FcGoogle className="text-xl" />
@@ -233,11 +240,15 @@ const SignIn = () => {
                 </motion.button>
 
                 {/* Signup */}
-                <p className="text-sm text-center text-base-400 mt-6">
-                    Don't have an account? <Link to="/signup" className="text-primary font-medium hover:underline">Sign up</Link>
+                <p className="text-sm text-center text-base-content/70 mt-6">
+                    Don't have an account?{' '}
+                    <Link to="/signup" className="text-primary font-medium hover:underline">
+                        Sign up
+                    </Link>
                 </p>
             </motion.div>
         </section>
+
     );
 };
 
