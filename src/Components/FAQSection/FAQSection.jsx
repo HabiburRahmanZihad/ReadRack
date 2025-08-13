@@ -40,38 +40,29 @@ const FAQSection = () => {
         setOpenIndex(openIndex === index ? null : index);
     };
 
-    // Animation variants for the question button
     const buttonVariants = {
-        initial: { backgroundColor: "#ffffff" },
-        hover: { backgroundColor: "#E7E7E7" },
-        open: { backgroundColor: "#E7E7E7" },
+        initial: { backgroundColor: "var(--color-base-100)" },
+        hover: { backgroundColor: "var(--color-base-200)" },
+        open: { backgroundColor: "var(--color-base-200)" },
     };
 
-    // Animation variants for the icon
     const iconVariants = {
         closed: { rotate: 0, scale: 1 },
         open: { rotate: 45, scale: 1.2 },
     };
 
-    // Animation variants for the answer panel
     const answerVariants = {
         collapsed: { height: 0, opacity: 0 },
         expanded: { height: "auto", opacity: 1 },
     };
 
     return (
-        <section
-            className="py-20 px-6 bg-base-200"
-        >
+        <section className="py-20 px-6 bg-base-200">
             <div className="max-w-4xl mx-auto">
-                <h2
-                    className="text-4xl text-primary md:text-5xl font-extrabold mb-6 text-center tracking-tight"
-                >
+                <h2 className="text-4xl text-primary md:text-5xl font-extrabold mb-6 text-center tracking-tight">
                     Frequently Asked Questions
                 </h2>
-                <p
-                    className="text-center text-secondary mb-16 max-w-3xl mx-auto text-lg"
-                >
+                <p className="text-center text-secondary mb-16 max-w-3xl mx-auto text-lg">
                     Need help with ReadRack? Here are some common questions we hear from fellow book lovers.
                 </p>
                 <div className="space-y-6">
@@ -80,7 +71,8 @@ const FAQSection = () => {
                         return (
                             <motion.div
                                 key={index}
-                                className="border bg-base-100 border-base-300 rounded-2xl shadow-sm"
+                                className="border border-base-300 rounded-2xl shadow-sm"
+                                style={{ backgroundColor: "var(--color-base-100)" }}
                                 layout
                                 initial={false}
                                 transition={{ duration: 0.35, ease: "easeInOut" }}
@@ -89,10 +81,9 @@ const FAQSection = () => {
                                     onClick={() => toggle(index)}
                                     aria-expanded={isOpen}
                                     aria-controls={`faq-content-${index}`}
-
                                     id={`faq-header-${index}`}
-
-                                    className="w-full text-accent flex justify-between items-center p-6 text-left font-semibold rounded-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-primary transition-all duration-200 hover:scale-105"
+                                    className="w-full flex justify-between items-center p-6 text-left font-semibold rounded-2xl focus:outline-none focus-visible:ring-4 focus-visible:ring-primary transition-all duration-200 hover:scale-105"
+                                    style={{ color: "var(--color-base-content)" }}
                                     variants={buttonVariants}
                                     initial="initial"
                                     animate={isOpen ? "open" : "initial"}
@@ -125,7 +116,8 @@ const FAQSection = () => {
                                                 type: "spring",
                                                 stiffness: 300,
                                             }}
-                                            className="px-6 pb-6 text-neutral leading-relaxed text-base md:text-lg overflow-hidden"
+                                            className="px-6 pb-6 leading-relaxed text-base md:text-lg overflow-hidden"
+                                            style={{ color: "var(--color-base-content)" }}
                                             role="region"
                                             aria-labelledby={`faq-header-${index}`}
                                         >
