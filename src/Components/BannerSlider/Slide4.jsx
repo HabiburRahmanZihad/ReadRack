@@ -7,7 +7,7 @@ const Slide4 = () => {
     const isMdUp = useMediaQuery('(min-width: 768px)');
 
     return (
-        <div className="w-full min-h-[500px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100 gap-2">
+        <div className="w-full min-h-[600px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100 gap-2">
 
             <div className="w-full lg:w-1/2 px-2 lg:px-8">
                 <p className="px-3 py-px mb-4 text-xs font-semibold tracking-wider text-base-100 uppercase rounded-full bg-primary w-fit">

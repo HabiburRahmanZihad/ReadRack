@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import { FaInfoCircle, FaThumbsUp } from 'react-icons/fa';
 
 const PopularBookCard = ({ book }) => {
-    const { _id, cover_photo, book_title, book_author, book_category, upvote = 0 } = book;
+    const { _id, cover_photo, book_title, book_author, book_category, upvote = 0, book_overview } = book;
 
     return (
         <motion.div
@@ -40,6 +40,8 @@ const PopularBookCard = ({ book }) => {
                         <span>{upvote}</span>
                     </div>
                 </div>
+
+                <p className="text-sm text-neutral mb-4">{book_overview}</p>
 
                 <Link
                     to={`/books/${_id}`}

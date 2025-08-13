@@ -5,7 +5,7 @@ const Slide2 = () => {
     const isMediumUp = useMediaQuery('(min-width: 768px)');
 
     return (
-        <div className="w-full min-h-[500px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100">
+        <div className="w-full min-h-[600px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100">
             
             {/* Image */}
             <div className="w-full lg:w-1/2 mb-6 lg:mb-0">

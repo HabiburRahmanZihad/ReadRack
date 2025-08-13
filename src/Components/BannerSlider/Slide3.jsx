@@ -1,6 +1,6 @@
 const Slide3 = () => {
     return (
-        <div className="w-full min-h-[500px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100 gap-4">
+        <div className="w-full min-h-[600px] flex flex-col lg:flex-row items-center justify-between px-4 py-10 bg-base-100 gap-4">
 
             {/* Text Content */}
             <div className="w-full lg:w-1/2 px-2 lg:px-8">

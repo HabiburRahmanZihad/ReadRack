@@ -5,13 +5,13 @@ const Slide1 = () => {
     const isMediumUp = useMediaQuery('(min-width: 768px)');
 
     return (
-        <div className="w-full min-h-[500px] p-4 sm:p-10 text-neutral flex justify-center bg-base-100">
+        <div className="w-full min-h-[600px] p-4 sm:p-10 text-neutral flex justify-center bg-base-100">
             <div className="flex flex-col max-w-4xl w-full overflow-hidden rounded">
                 {/* Image */}
                 <img
                     src="https://i.ibb.co/1fRwpNZr/1.png"
                     alt="Bookshelf and reader"
-                    className="w-full h-64 sm:h-80 lg:h-[340px] bg-base-300 object-cover rounded border border-primary shadow-lg"
+                    className="w-full h-64 sm:h-80 lg:h-[400px] bg-base-300 object-cover rounded border border-primary shadow-lg"
                     loading="lazy"
                 />
 
